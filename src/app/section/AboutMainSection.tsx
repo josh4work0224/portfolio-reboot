@@ -82,7 +82,7 @@ const AboutSection: React.FC = () => {
           <div className="h-[100vh] flex flex-col items-start justify-center relative">
             <div className="sticky top-[20vh]">
               <h1 className="text-6xl lg:text-8xl font-bold text-gray-900 mb-8">
-                I'm SHENGCHI
+                I&apos;m SHENGCHI
               </h1>
               {/* 副標題 - char by char 效果 */}
               <h2
@@ -130,9 +130,9 @@ const AboutSection: React.FC = () => {
               between brands and their audiences.
             </p>
             <p>
-              When I'm not designing or coding, you can find me exploring new
-              technologies, reading about design trends, or enjoying a good cup
-              of coffee while sketching ideas for my next project.
+              When I&apos;m not designing or coding, you can find me exploring
+              new technologies, reading about design trends, or enjoying a good
+              cup of coffee while sketching ideas for my next project.
             </p>
           </div>
         </div>
