@@ -24,7 +24,7 @@ function LogoDotPattern() {
     const logoW = 692,
       logoH = 346;
     const path2d = new Path2D(logoPath);
-    let mouse = { x: -1000, y: -1000 };
+    const mouse = { x: -1000, y: -1000 };
     let animationId: number;
     let t = 0;
 
