@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+import GlobalTransition from "./component/PageTransition";
+import NavbarWOSwitch from "./component/navbarWOSwitch";
+import Footer from "./component/footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Inter 字體 - 用於內文
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+// 使用 Variable 字體（一個檔案包含所有字重）
+const satoshi = localFont({
+  src: "./fonts/Satoshi-Variable.woff2", // 只需要這一個檔案
+  variable: "--font-satoshi",
+  display: "swap",
+  weight: "300,900", // 支援的字重範圍
 });
 
 export const metadata: Metadata = {
@@ -25,9 +34,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${satoshi.variable} antialiased theme-dark`}
       >
-        {children}
+        <NavbarWOSwitch />
+        <GlobalTransition>{children}</GlobalTransition>
+        <Footer />
       </body>
     </html>
   );
