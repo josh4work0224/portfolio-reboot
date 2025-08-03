@@ -1,12 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import HeroSection from "./section/homeHero";
 import AboutSection from "./section/homeAbout";
 import HomeContentful from "./section/homeContentful";
-import { useEffect } from "react";
+import { usePageReady } from "@/lib/usePageReady";
 
 export default function Home() {
+  usePageReady();
+
   return (
     <>
       <HeroSection />

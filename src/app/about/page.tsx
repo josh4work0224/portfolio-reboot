@@ -6,13 +6,14 @@ import { useEffect } from "react";
 import AboutSection from "../section/AboutMainSection";
 import ExpertiseSection from "../section/AboutExpertiseSection";
 import ExperienceSection from "../section/AboutExperienceSection";
+import { usePageReady } from "@/lib/usePageReady";
 
 const AboutPage: React.FC = () => {
   useEffect(() => {
     document.body.classList.remove("theme-dark");
     document.body.classList.add("theme-light");
   }, []);
-
+  usePageReady();
   return (
     <div className="min-h-screen bg-white">
       <AboutSection />
