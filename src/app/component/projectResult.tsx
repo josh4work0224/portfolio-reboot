@@ -22,7 +22,7 @@ const ResultsSection: React.FC<ResultsSectionProps> = ({
   const scrollTriggersRef = useRef<ScrollTrigger[]>([]);
 
   // 將文字內容分解為字符的函數，正確處理空格
-  const wrapTextInChars = (element: HTMLElement) => {
+  const wrapTextInWordChars = (element: HTMLElement) => {
     const walker = document.createTreeWalker(
       element,
       NodeFilter.SHOW_TEXT,
@@ -39,35 +39,34 @@ const ResultsSection: React.FC<ResultsSectionProps> = ({
       }
     }
 
-    // 將每個文字節點分解為字符
     textNodes.forEach((textNode) => {
       const text = textNode.textContent || "";
       const parent = textNode.parentNode;
-
       if (!parent) return;
 
-      // 創建包含字符的容器
       const wrapper = document.createElement("span");
       wrapper.style.display = "inline";
 
-      // 將每個字符包裝在 span 中，特別處理空格
-      text.split("").forEach((char) => {
-        const charSpan = document.createElement("span");
-        charSpan.className = "char transition-opacity duration-300";
+      const words = text.split(" ");
 
-        if (char === " ") {
-          // 空格特別處理
-          charSpan.innerHTML = "&nbsp;"; // 使用不斷行空格
-          charSpan.style.display = "inline"; // 空格用 inline
-        } else {
+      words.forEach((word, wordIndex) => {
+        const wordSpan = document.createElement("span");
+        wordSpan.className = "word";
+        wordSpan.style.display = "inline-block";
+        wordSpan.style.whiteSpace = "nowrap";
+        wordSpan.style.marginRight = "0.25em";
+
+        word.split("").forEach((char) => {
+          const charSpan = document.createElement("span");
+          charSpan.className =
+            "char transition-opacity duration-300 inline-block";
           charSpan.textContent = char;
-          charSpan.style.display = "inline-block"; // 其他字符用 inline-block
-        }
+          wordSpan.appendChild(charSpan);
+        });
 
-        wrapper.appendChild(charSpan);
+        wrapper.appendChild(wordSpan);
       });
 
-      // 替換原始文字節點
       parent.replaceChild(wrapper, textNode);
     });
   };
@@ -84,7 +83,7 @@ const ResultsSection: React.FC<ResultsSectionProps> = ({
       if (!contentRef.current) return;
 
       // 將文字分解為字符
-      wrapTextInChars(contentRef.current);
+      wrapTextInWordChars(contentRef.current);
 
       // 獲取所有字符元素
       const chars = contentRef.current.querySelectorAll(".char");

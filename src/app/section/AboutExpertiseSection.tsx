@@ -34,7 +34,7 @@ const ExpertiseSection: React.FC = () => {
         "Building responsive and performant web applications using modern technologies and best practices.",
       icon: (
         <svg
-          className="w-6 h-6 text-gray-700"
+          className="w-6 h-6 text-black"
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -53,7 +53,7 @@ const ExpertiseSection: React.FC = () => {
         "Developing cohesive brand identities and visual systems that communicate effectively across all touchpoints.",
       icon: (
         <svg
-          className="w-6 h-6 text-gray-700"
+          className="w-6 h-6 text-black"
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -68,7 +68,7 @@ const ExpertiseSection: React.FC = () => {
         "Rapid prototyping and development using no-code tools for quick iterations and client demonstrations.",
       icon: (
         <svg
-          className="w-6 h-6 text-gray-700"
+          className="w-6 h-6 text-black"
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -131,10 +131,10 @@ const ExpertiseSection: React.FC = () => {
     >
       <div className="grid grid-cols-12 gap-6">
         <div className="col-span-12 mb-8">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold text-black mb-4">
             Expertise
           </h2>
-          <p className="text-lg text-gray-700">
+          <p className="text-lg text-black">
             Areas where I excel and can help bring your projects to life.
           </p>
         </div>
@@ -149,7 +149,7 @@ const ExpertiseSection: React.FC = () => {
           >
             <div className=" pt-4 border-t-1 border-gray-700 h-full">
               <div className="flex flex-row justify-between">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl font-semibold text-black mb-3">
                   {item.title}
                 </h3>
                 <div
@@ -158,12 +158,12 @@ const ExpertiseSection: React.FC = () => {
                   {item.icon}
                 </div>
               </div>
-              <p className="text-gray-600 mb-4">{item.description}</p>
+              <p className="text-gray-500 mb-4">{item.description}</p>
               <div className="flex flex-wrap gap-2">
                 {item.skills.map((skill, skillIndex) => (
                   <span
                     key={skillIndex}
-                    className="px-0.5 bg-gray-700 text-white text-sm rounded-xs"
+                    className="px-0.5 bg-black text-white text-sm rounded-xs"
                   >
                     {skill}
                   </span>

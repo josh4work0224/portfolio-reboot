@@ -25,9 +25,9 @@ const StrategySection: React.FC<StrategySectionProps> = ({
       <div className="lg:col-span-8 col-span-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {data?.map((item, index) => (
-            <div key={index} className="border-t-1 pt-2">
-              <h3 className="text-xl font-bold">{item.title}</h3>
-              <div className="prose pt-1">
+            <div key={index} className="border-t-1 border-black pt-2">
+              <h3 className="text-black text-xl font-bold">{item.title}</h3>
+              <div className="prose pt-1 text-black">
                 {/* 假設 SectionItem 有 description 屬性 */}
                 {item.description && <PortableText value={item.description} />}
               </div>

@@ -20,8 +20,6 @@ const ExperienceSection: React.FC = () => {
       description:
         "Leading design initiatives for web and mobile applications, collaborating with cross-functional teams to deliver user-centered solutions that increased user engagement by 40%.",
       skills: ["UI Design", "User Research", "Prototyping"],
-      skillsBg: "bg-blue-50",
-      skillsText: "text-blue-700",
     },
     {
       title: "Product Designer",
@@ -30,8 +28,6 @@ const ExperienceSection: React.FC = () => {
       description:
         "Developed responsive web applications using React and Next.js, implemented design systems, and optimized performance resulting in 60% faster load times.",
       skills: ["React", "Next.js", "TypeScript"],
-      skillsBg: "bg-green-50",
-      skillsText: "text-green-700",
     },
     {
       title: "Master in Interaction Design",
@@ -40,8 +36,6 @@ const ExperienceSection: React.FC = () => {
       description:
         "Worked with diverse clients on branding, web design, and digital marketing projects. Delivered over 50 successful projects with 95% client satisfaction rate.",
       skills: ["Branding", "Web Design", "Client Management"],
-      skillsBg: "bg-purple-50",
-      skillsText: "text-purple-700",
     },
     {
       title: "Junior Designer",
@@ -52,8 +46,6 @@ const ExperienceSection: React.FC = () => {
       borderColor: "border-orange-500",
       companyColor: "text-orange-600",
       skills: ["Print Design", "Adobe Creative Suite", "Brand Identity"],
-      skillsBg: "bg-orange-50",
-      skillsText: "text-orange-700",
     },
   ];
 

@@ -21,7 +21,7 @@ const PainPointsSection: React.FC<PainPointsSectionProps> = ({
       showTitleField={true}
       backgroundColor={backgroundColor}
       textColor="text-white"
-      className="rounded-lg shadow-sm"
+      className=""
     />
   );
 };

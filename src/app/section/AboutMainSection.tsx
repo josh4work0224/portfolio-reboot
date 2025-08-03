@@ -16,22 +16,27 @@ const AboutSection: React.FC = () => {
     "I'm a digital designer and developer with a passion for creating beautiful, functional, and user-centered experiences. With over 5 years of experience in the industry, I've worked with startups and established companies to bring their visions to life.";
 
   // 將文字分解為字符的函數
-  const wrapTextInChars = (element: HTMLElement, text: string) => {
+  const wrapTextInWordChars = (element: HTMLElement, text: string) => {
     element.innerHTML = "";
 
-    text.split("").forEach((char) => {
-      const charSpan = document.createElement("span");
-      charSpan.className = "char transition-opacity duration-300";
+    const words = text.split(" ");
 
-      if (char === " ") {
-        charSpan.innerHTML = "&nbsp;";
-        charSpan.style.display = "inline";
-      } else {
+    words.forEach((word, wordIndex) => {
+      const wordSpan = document.createElement("span");
+      wordSpan.className = "word-wrapper inline-block";
+      wordSpan.style.display = "inline-block";
+      wordSpan.style.marginRight = "0.25em";
+
+      // 把每個字母變成 span.char
+      word.split("").forEach((char) => {
+        const charSpan = document.createElement("span");
+        charSpan.className =
+          "char inline-block transition-opacity duration-300";
         charSpan.textContent = char;
-        charSpan.style.display = "inline-block";
-      }
+        wordSpan.appendChild(charSpan);
+      });
 
-      element.appendChild(charSpan);
+      element.appendChild(wordSpan);
     });
   };
 
@@ -43,7 +48,7 @@ const AboutSection: React.FC = () => {
     scrollTriggersRef.current = [];
 
     // 將副標題文字分解為字符
-    wrapTextInChars(subtitleRef.current, subtitle);
+    wrapTextInWordChars(subtitleRef.current, subtitle);
 
     // 獲取所有字符元素
     const chars = subtitleRef.current.querySelectorAll(".char");
@@ -81,13 +86,13 @@ const AboutSection: React.FC = () => {
           {/* 主標題 - 無特效 */}
           <div className="h-[100vh] flex flex-col items-start justify-center relative">
             <div className="sticky top-[20vh]">
-              <h1 className="text-6xl lg:text-8xl font-bold text-gray-900 mb-8">
+              <h1 className="text-6xl lg:text-8xl font-bold text-black mb-8">
                 I&apos;m SHENGCHI
               </h1>
               {/* 副標題 - char by char 效果 */}
               <h2
                 ref={subtitleRef}
-                className="lg:text-4xl text-2xl font-medium text-gray-700 leading-tight tracking-tight mb-6"
+                className="lg:text-4xl text-2xl font-medium text-black leading-tight tracking-tight mb-6"
               >
                 {/* 文字會被 JavaScript 替換 */}
               </h2>
@@ -99,25 +104,26 @@ const AboutSection: React.FC = () => {
             </h3>
             <div className="lg:col-span-4 col-span-8 flex flex-col pt-2 gap-2 border-t-1 border-gray-700 text-lg">
               <p className="text-gray-500">
-                <strong className="text-gray-700">Location:</strong> Taipei,
-                Taiwan
+                <span className="text-black font-medium">Location:</span>{" "}
+                Taipei, Taiwan
               </p>
             </div>
             <div className="lg:col-span-4 col-span-8 flex flex-col pt-2 gap-2 border-t-1 border-gray-700 text-lg">
               <p className="text-gray-500">
-                <strong className="text-gray-700">Experience:</strong> 5+ Years
+                <strong className="text-black font-medium">Experience:</strong>{" "}
+                5+ Years
               </p>
             </div>
             <div className="lg:col-span-4 col-span-8 flex flex-col pt-2 gap-2 border-t-1 border-gray-700 text-lg">
               <p className="text-gray-500">
-                <strong className="text-gray-700">Focus:</strong> UI/UX Design &
-                Development
+                <strong className="text-black font-medium">Focus:</strong> UI/UX
+                Design & Development
               </p>
             </div>
             <div className="lg:col-span-4 col-span-8 flex flex-col pt-2 gap-2 border-t-1 border-gray-700 text-lg">
               <p className="text-gray-500">
-                <strong className="text-gray-700">Education:</strong> Design &
-                Computer Science
+                <strong className="text-black font-medium">Education:</strong>{" "}
+                Design & Computer Science
               </p>
             </div>
           </div>
