@@ -46,6 +46,12 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   manifest: "/manifest.json",
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     title: "Sheng-Chi Huang - Web Designer & Creative Developer",
     description:
@@ -65,7 +71,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Josh Huang - 設計師 & 開發者",
+    title: "Sheng-Chi Huang - Web Designer & Creative Developer",
     description:
       "Sheng-Chi Huang's personal portfolio website showcases design and development projects, with a focus on user experience and creative solutions.",
     images: ["/og-image.svg"],
