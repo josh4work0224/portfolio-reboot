@@ -25,6 +25,14 @@ export interface GalleryColsProps {
   className?: string;
 }
 
+export interface ProjectImageDetailsProps {
+  image1?: GalleryImage;
+  image2?: GalleryImage;
+  image3?: GalleryImage;
+  backgroundColor?: string;
+  className?: string;
+}
+
 export interface ImageItem {
   _id: string;
   title: string;
