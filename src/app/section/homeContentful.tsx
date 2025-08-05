@@ -7,6 +7,7 @@ import { projectData } from "../../lib/sanity.queries";
 import Link from "next/link";
 import { ProjectArchive } from "../types/project";
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -141,8 +142,8 @@ const HomeContentful: React.FC = () => {
                         <Image
                           src={project.thumbnail.asset.url}
                           alt={project.title}
-                          width={500}
-                          height={500}
+                          width={1920}
+                          height={1920}
                           className="w-full h-full object-cover"
                         />
                       )}
@@ -166,9 +167,30 @@ const HomeContentful: React.FC = () => {
             </div>
           </>
         )}
-        <div className="mt-4 col-span-12">
-          <Link href="/projects" className="text-blue-500 hover:underline">
-            View All Projects
+        <div className="mt-4 col-span-12 flex justify-start items-start">
+          <Link
+            className="flex flex-col gap-2 group overflow-hidden"
+            href="/projects"
+          >
+            <div>
+              <div className="flex flex-row items-center gap-2">
+                <p className="font-semibold transition-colors duration-300 text-black group-hover:text-gray-500">
+                  View All Projects
+                </p>
+                <div className="w-5 ml-2 overflow-hidden">
+                  <div className="flex flex-row gap-y-4 justify-end group-hover:translate-x-6 transition-transform duration-300">
+                    <div className="h-4">
+                      <ArrowRight size={20} color="black" />
+                    </div>
+                    <div className="h-4">
+                      <ArrowRight size={20} color="black" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="h-[2px] bg-gray-800 w-full group-hover:w-0 transition-all"></div>
           </Link>
         </div>
       </div>

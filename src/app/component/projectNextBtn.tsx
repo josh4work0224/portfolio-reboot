@@ -39,7 +39,7 @@ const NextProject: React.FC<NextProjectProps> = ({
               <div className="overflow-hidden duration-300 flex flex-col lg:grid lg:grid-cols-8 gap-4">
                 {/* 項目信息 */}
                 <div className=" col-span-4">
-                  <h3 className="text-xl font-semibold mb-2 text-black group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-xl font-semibold mb-2 text-black group-hover:text-gray-600 transition-colors">
                     {project.title}
                   </h3>
                   <div className="flex flex-row gap-2">

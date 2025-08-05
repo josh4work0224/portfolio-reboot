@@ -15,6 +15,7 @@ import BackgroundSection from "../component/projectBackground";
 import GalleryHolder from "../component/projectFullImage";
 import GalleryCols from "../component/projectImage2Cols";
 import NextProject from "../component/projectNextBtn";
+import ProjectImageDetails from "../component/projectImageDetails";
 
 const ProjectSingleContent = () => {
   const [project, setProject] = useState<ProjectContent | null>(null);
@@ -154,10 +155,19 @@ const ProjectSingleContent = () => {
 
         <SolutionSection data={project.solution} backgroundColor="#ffffff" />
 
+        {galleryImages[4] && galleryImages[5] && (
+          <ProjectImageDetails
+            image1={galleryImages[4]}
+            image2={galleryImages[5]}
+            image3={galleryImages[6]}
+            backgroundColor="#f8fafc"
+          />
+        )}
+
         <ResultsSection data={project.result} backgroundColor="#f8fafc" />
 
-        {galleryImages[4] && (
-          <GalleryHolder image={galleryImages[4]} backgroundColor="#f8fafc" />
+        {galleryImages[7] && (
+          <GalleryHolder image={galleryImages[7]} backgroundColor="#f8fafc" />
         )}
         <NextProject projects={project.nextProject} backgroundColor="#ffffff" />
       </div>

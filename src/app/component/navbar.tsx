@@ -392,7 +392,7 @@ const Navbar = () => {
                           </Link>
                         ))}
                       </nav>
-                      <div className="mt-12">
+                      <div className="">
                         <a
                           href="https://linkedin.com/in/your-profile"
                           target="_blank"
