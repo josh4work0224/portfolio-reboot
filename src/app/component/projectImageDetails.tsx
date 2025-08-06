@@ -27,8 +27,8 @@ const ProjectImageDetails: React.FC<ProjectImageDetailsProps> = ({
           <Image
             src={image1.asset.url}
             alt="Project gallery image"
-            width={1200}
-            height={800}
+            width={1920}
+            height={1080}
             className="w-full h-full object-cover"
           />
         </div>
