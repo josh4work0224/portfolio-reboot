@@ -117,7 +117,9 @@ const HomeContentful: React.FC = () => {
                       {projects[0].client}
                     </p>
                     <p className="text-gray-500">
-                      {projects[0].category.map((cat) => cat.title).join(", ")}
+                      {projects[0].category
+                        ?.map((cat) => cat.title)
+                        .join(", ") || ""}
                     </p>
                   </div>
                   <h3 className="text-black text-2xl font-medium">
@@ -154,7 +156,9 @@ const HomeContentful: React.FC = () => {
                           {project.client}
                         </p>
                         <p className="text-gray-500">
-                          {project.category.map((cat) => cat.title).join(", ")}
+                          {project.category
+                            ?.map((cat) => cat.title)
+                            .join(", ") || ""}
                         </p>
                       </div>
                       <h2 className="text-black text-2xl font-medium">
