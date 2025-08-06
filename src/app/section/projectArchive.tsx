@@ -87,8 +87,8 @@ const ProjectsArchive: React.FC = () => {
                     <Image
                       src={project.thumbnail.asset.url}
                       alt={project.title}
-                      width={500}
-                      height={500}
+                      width={1920}
+                      height={1080}
                       className={`w-full h-full object-cover `}
                     />
                   )}

@@ -182,7 +182,7 @@ const ProjectSingleHero = () => {
               rel="noopener noreferrer"
               className="btn btn-primary pb-2 border-gray-300 flex flex-col gap-2 items-start group"
             >
-              <div className="mt-6 flex flex-row items-center">
+              <div className="mt-6 flex flex-row items-center text-white">
                 <strong>Visit Website</strong>
                 <div className="w-5 ml-2 overflow-hidden">
                   <div className="flex flex-row gap-y-4 justify-end group-hover:translate-x-6 transition-transform duration-300">

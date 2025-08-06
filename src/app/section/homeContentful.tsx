@@ -104,8 +104,8 @@ const HomeContentful: React.FC = () => {
                     <Image
                       src={projects[0].thumbnail.asset.url}
                       alt={projects[0].title}
-                      width={500}
-                      height={500}
+                      width={1920}
+                      height={1080}
                       className="w-full h-full object-cover"
                     />
                   )}

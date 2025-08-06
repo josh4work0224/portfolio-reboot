@@ -30,8 +30,8 @@ const GalleryHolder: React.FC<GalleryHolderProps> = ({
           <Image
             src={image.asset.url}
             alt="Project gallery image"
-            width={1200}
-            height={800}
+            width={1920}
+            height={1080}
             className="sticky top-0 w-full h-full object-cover"
           />
         </div>
