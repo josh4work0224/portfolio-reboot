@@ -141,7 +141,7 @@ const NavbarWOSwitch = () => {
   const navLinks = [
     { name: "Projects", href: "/projects", delay: 0 }, // 無延遲
     { name: "About me", href: "/about", delay: 100 }, // 0.1秒延遲
-    { name: "Contact", href: "#contact", delay: 200 }, // 0.2秒延遲
+    { name: "Contact", href: "mailto:josh4work0224@gmail.com", delay: 200 }, // 0.2秒延遲
   ];
 
   const [isMenuAnimating, setIsMenuAnimating] = useState(false);

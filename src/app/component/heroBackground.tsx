@@ -28,7 +28,6 @@ function LogoDotPattern() {
     let animationId: number;
     let t = 0;
 
-    // 這些參數會根據 resize 動態更新
     let isMobile: boolean,
       spacing: number,
       radius: number,
@@ -38,17 +37,28 @@ function LogoDotPattern() {
 
     function updateParams() {
       if (!canvas || !ctx) return;
+
       width = canvas.offsetWidth;
       height = canvas.offsetHeight;
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
       isMobile = window.innerWidth < 768;
       spacing = isMobile ? 10 : 18;
       radius = isMobile ? 1.2 : 2;
-      scale = Math.min((width * 0.92) / logoW, (height * 0.92) / logoH);
-      offsetX = (width - logoW * scale) / 2;
-      offsetY = (height - logoH * scale) / 2;
+
+      // 新的縮放邏輯：高度固定為螢幕的 80%，寬度按比例
+      const targetHeight = height * 0.8;
+      scale = targetHeight / logoH;
+
+      // 計算縮放後的實際 logo 尺寸
+      const scaledLogoW = logoW * scale;
+      const scaledLogoH = logoH * scale;
+
+      // 真正的置中
+      offsetX = (width - scaledLogoW) / 2;
+      offsetY = (height - scaledLogoH) / 2;
     }
 
     updateParams();
@@ -56,10 +66,12 @@ function LogoDotPattern() {
     function draw() {
       if (!ctx) return;
       ctx.clearRect(0, 0, width, height);
+
       for (let screenY = 0; screenY < height; screenY += spacing) {
         for (let screenX = 0; screenX < width; screenX += spacing) {
           const logoX = (screenX - offsetX) / scale;
           const logoY = (screenY - offsetY) / scale;
+
           if (ctx.isPointInPath(path2d, logoX, logoY)) {
             let alpha = 0.18;
             if (isMobile) {
@@ -94,17 +106,22 @@ function LogoDotPattern() {
     }
 
     function onResize() {
-      updateParams();
-      draw(); // 立刻重繪
+      setTimeout(() => {
+        updateParams();
+        draw();
+      }, 100);
     }
 
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("resize", onResize);
+    window.addEventListener("orientationchange", onResize);
+
     animate();
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("resize", onResize);
+      window.removeEventListener("orientationchange", onResize);
       cancelAnimationFrame(animationId);
     };
   }, []);
@@ -115,6 +132,7 @@ function LogoDotPattern() {
       style={{
         width: "100%",
         height: "100%",
+        maxHeight: "100vh",
         pointerEvents: "none",
         zIndex: 0,
       }}

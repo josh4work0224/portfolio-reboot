@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 const Footer = () => {
   return (
     <footer>
-      <div className="grid grid-cols-12 mx-auto px-4 py-8 sm:px-6 lg:px-48 justify-start items-start gap-4">
+      <div className="grid grid-cols-12 mx-auto px-4 py-8 sm:px-6 lg:px-48 justify-start items-start gap-4 bg-white">
         <Link
           href="mailto:josh4work0224@gmail.com"
           className=" flex flex-row items-center justify-start hover:justify-between group gap-2 text-6xl font-medium col-span-12 text-black hover:text-gray-500 transition-colors duration-300"
