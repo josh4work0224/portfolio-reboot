@@ -13,7 +13,7 @@ const LogoDotPattern = dynamic(() => import("../component/heroBackground"), {
 const HeroSection: React.FC = () => {
   return (
     <section className="min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="fixed w-screen h-screen top-0 left-[40vw]">
+      <div className="fixed w-screen h-screen top-0 lg:left-[30vw] left-0">
         <LogoDotPattern />
       </div>
 

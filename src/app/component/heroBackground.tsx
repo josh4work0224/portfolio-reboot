@@ -38,25 +38,33 @@ function LogoDotPattern() {
     function updateParams() {
       if (!canvas || !ctx) return;
 
-      width = canvas.offsetWidth;
-      height = canvas.offsetHeight;
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
+      const rect = canvas.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       isMobile = window.innerWidth < 768;
       spacing = isMobile ? 10 : 18;
       radius = isMobile ? 1.2 : 2;
 
-      // 新的縮放邏輯：高度固定為螢幕的 80%，寬度按比例
-      const targetHeight = height * 0.8;
-      scale = targetHeight / logoH;
+      // 用「真正的視窗高度」當 80% 上限（iOS 用 visualViewport 較準）
+      const viewportH = window.visualViewport?.height || window.innerHeight;
 
-      // 計算縮放後的實際 logo 尺寸
+      const maxH = viewportH * 0.6; // 絕對不超過 80vh
+      const maxW = width * 0.9; // 也可改成 viewport 寬度上限： (window.visualViewport?.width || window.innerWidth) * 0.9
+
+      const scaleH = maxH / logoH;
+      const scaleW = maxW / logoW;
+      scale = Math.min(scaleH, scaleW);
+
       const scaledLogoW = logoW * scale;
       const scaledLogoH = logoH * scale;
 
-      // 真正的置中
+      // 畫在目前這個 canvas 中置中（大小受 viewport 上限控制）
       offsetX = (width - scaledLogoW) / 2;
       offsetY = (height - scaledLogoH) / 2;
     }
@@ -130,9 +138,10 @@ function LogoDotPattern() {
     <canvas
       ref={canvasRef}
       style={{
+        position: "absolute",
+        inset: 0,
         width: "100%",
-        height: "100%",
-        maxHeight: "100vh",
+        height: "100vh",
         pointerEvents: "none",
         zIndex: 0,
       }}
