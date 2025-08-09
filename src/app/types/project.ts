@@ -108,4 +108,6 @@ export interface ProjectArchive {
       url: string;
     };
   };
+  isFeatured?: boolean;
+  publishDate?: string;
 }

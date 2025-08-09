@@ -49,7 +49,11 @@ const HomeContentful: React.FC = () => {
     projectData("")
       .then((data) => {
         console.log("Project Data:", data);
-        setProjects(data);
+        // 為 project 參數添加 ProjectArchive 類型註解
+        const featuredProjects = data.filter(
+          (project: ProjectArchive) => project.isFeatured === true
+        );
+        setProjects(featuredProjects);
       })
       .catch((err) => {
         console.error("Sanity fetch error:", err);

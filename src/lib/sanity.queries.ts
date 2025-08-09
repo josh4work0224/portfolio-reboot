@@ -93,7 +93,7 @@ const projectQuery = (slug?: string) => {
     return `*[_type == "project" && slug.current == $slug][0]{${baseFields}}`;
   } else {
     // 獲取所有項目，按創建時間排序
-    return `*[_type == "project"] | order(_createdAt desc){${baseFields}}`;
+    return `*[_type == "project"] | order(publishDate desc){${baseFields}}`;
   }
 };
 

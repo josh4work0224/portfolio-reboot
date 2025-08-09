@@ -21,7 +21,7 @@ const GalleryCols: React.FC<GalleryColsProps> = ({
       style={sectionStyle}
     >
       <div className="w-full mx-auto px-4 py-16 sm:px-6 lg:pl-48 lg:pr-16 grid grid-cols-12 gap-4 transition-colors duration-300">
-        <div className="relative w-full lg:h-[80vh] h-auto max-h-[100rem] overflow-hidden col-span-12 lg:col-span-6 lg:aspect-auto aspect-square">
+        <div className="relative w-full max-h-[100rem] overflow-hidden col-span-12 lg:col-span-6 aspect-[4/3]">
           <Image
             src={image1.asset.url}
             alt="Project gallery image"
@@ -30,7 +30,7 @@ const GalleryCols: React.FC<GalleryColsProps> = ({
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="relative w-full lg:h-[80vh] h-auto max-h-[100rem] overflow-hidden col-span-12 lg:col-span-6 lg:aspect-auto aspect-square">
+        <div className="relative w-full max-h-[100rem] overflow-hidden col-span-12 lg:col-span-6 aspect-[4/3]">
           <Image
             src={image2.asset.url}
             alt="Project gallery image"
