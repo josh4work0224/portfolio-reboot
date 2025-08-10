@@ -18,11 +18,16 @@ const HomeContentful: React.FC = () => {
 
   useEffect(() => {
     const section = sectionRef.current;
-    if (!section) return;
+    const footer = document.querySelector("footer");
+    if (!section || !footer) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        const footerRect = footer.getBoundingClientRect();
+        const footerVisible =
+          footerRect.top < window.innerHeight && footerRect.bottom > 0;
+
+        if (entry.isIntersecting || footerVisible) {
           document.body.classList.remove("theme-dark");
           document.body.classList.add("theme-light");
           window.dispatchEvent(
@@ -36,9 +41,7 @@ const HomeContentful: React.FC = () => {
           );
         }
       },
-      {
-        threshold: 0.3, // 進入畫面 30% 才觸發
-      }
+      { threshold: 0.3 }
     );
 
     observer.observe(section);
