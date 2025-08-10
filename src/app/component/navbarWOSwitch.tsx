@@ -386,7 +386,7 @@ const NavbarWOSwitch = () => {
                       </nav>
                       <div className="">
                         <a
-                          href="https://linkedin.com/in/your-profile"
+                          href="https://www.linkedin.com/in/sheng-chi-huang-9600371a7/"
                           target="_blank"
                           rel="noopener noreferrer"
                           className={`flex items-center gap-3 text-lg transition-colors duration-200 ${
@@ -493,7 +493,7 @@ const NavbarWOSwitch = () => {
         <div className="flex-shrink-0 p-4 xl:p-6 mt-auto pointer-events-auto">
           <div className="flex justify-start">
             <a
-              href="https://linkedin.com/in/your-profile"
+              href="https://www.linkedin.com/in/sheng-chi-huang-9600371a7/"
               target="_blank"
               rel="noopener noreferrer"
               className={`transition-colors duration-200 navbar-item-initial ${
@@ -581,7 +581,7 @@ const NavbarWOSwitch = () => {
                 style={{ transitionDelay: "250ms" }}
               >
                 <a
-                  href="https://linkedin.com/in/your-profile"
+                  href="https://www.linkedin.com/in/sheng-chi-huang-9600371a7/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`flex items-center transition-colors duration-200 ${
