@@ -141,7 +141,7 @@ function LogoDotPattern() {
         position: "absolute",
         inset: 0,
         width: "100%",
-        height: "100vh",
+        height: "100dvh",
         pointerEvents: "none",
         zIndex: 0,
       }}
