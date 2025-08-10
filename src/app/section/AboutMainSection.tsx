@@ -111,7 +111,7 @@ const AboutSection: React.FC = () => {
             <div className="lg:col-span-4 col-span-8 flex flex-col pt-2 gap-2 border-t-1 border-gray-700 text-lg">
               <p className="text-gray-500">
                 <strong className="text-black font-medium">Experience:</strong>{" "}
-                5+ Years
+                3+ Years
               </p>
             </div>
             <div className="lg:col-span-4 col-span-8 flex flex-col pt-2 gap-2 border-t-1 border-gray-700 text-lg">

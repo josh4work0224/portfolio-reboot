@@ -15,37 +15,35 @@ const ExperienceSection: React.FC = () => {
   const experienceData = [
     {
       title: "Senior UI/UX Designer",
-      company: "tenten.co",
+      company: "Tenten.co",
       period: "2022 - Present",
       description:
-        "Leading design initiatives for web and mobile applications, collaborating with cross-functional teams to deliver user-centered solutions that increased user engagement by 40%.",
-      skills: ["UI Design", "User Research", "Prototyping"],
+        "Designed responsive websites using Webflow and Shopify, automated workflows with Make.com and Zapier, and developed digital prototypes to align with business objectives.",
+      skills: ["Webflow", "Shopify", "Automation", "Prototyping"],
     },
     {
       title: "Product Designer",
       company: "Netigate",
       period: "2021 - 2022",
       description:
-        "Developed responsive web applications using React and Next.js, implemented design systems, and optimized performance resulting in 60% faster load times.",
-      skills: ["React", "Next.js", "TypeScript"],
+        "Designed and maintained industrial IoT product interfaces with a focus on usability and user-centered principles. Conducted user research and iterative prototyping to enhance product experience.",
+      skills: ["UI Design", "User Research", "Prototyping"],
     },
     {
       title: "Master in Interaction Design",
       company: "Domus Academy",
       period: "2020 - 2021",
       description:
-        "Worked with diverse clients on branding, web design, and digital marketing projects. Delivered over 50 successful projects with 95% client satisfaction rate.",
-      skills: ["Branding", "Web Design", "Client Management"],
+        "Earned a Master's degree in Interaction Design in Italy, collaborating on projects that integrated design thinking, digital innovation, and user experience strategy.",
+      skills: ["Interaction Design", "Design Thinking", "UX Strategy"],
     },
     {
-      title: "Junior Designer",
-      company: "Design Studio Ltd.",
-      period: "2017 - 2018",
+      title: "Exhibition Designer & Filmmaker",
+      company: "Freelance",
+      period: "Previous Experience",
       description:
-        "Started my professional journey creating print and digital designs, learning industry best practices and developing foundational skills in design thinking and client communication.",
-      borderColor: "border-orange-500",
-      companyColor: "text-orange-600",
-      skills: ["Print Design", "Adobe Creative Suite", "Brand Identity"],
+        "Gained hands-on experience in spatial storytelling and visual communication through designing exhibitions and creating films.",
+      skills: ["Exhibition Design", "Storytelling", "Film Production"],
     },
   ];
 
