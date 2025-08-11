@@ -5,6 +5,7 @@ import "./globals.css";
 import GlobalTransition from "./component/PageTransition";
 import NavbarWOSwitch from "./component/navbarWOSwitch";
 import Footer from "./component/footer";
+import { Analytics } from "@vercel/analytics/next";
 
 // Inter 字體 - 用於內文
 const inter = Inter({
@@ -105,6 +106,7 @@ export default function RootLayout({
       >
         <NavbarWOSwitch />
         <GlobalTransition>{children}</GlobalTransition>
+        <Analytics />
         <Footer />
       </body>
     </html>
