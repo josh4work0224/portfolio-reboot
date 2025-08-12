@@ -16,6 +16,7 @@ const projectQuery = (slug?: string) => {
     publishDate,
     overview,
     background,
+    emoji,
     thumbnail{
       asset->{
         _id,
@@ -84,7 +85,7 @@ const projectQuery = (slug?: string) => {
           url
         }
       },
-      color
+      color,
     }
   `;
 

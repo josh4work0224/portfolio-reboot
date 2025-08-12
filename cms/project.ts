@@ -148,6 +148,11 @@ export default defineType({
       type: 'url',
     }),
     defineField({
+      name: 'emoji',
+      title: 'Transition emoji',
+      type: 'string',
+    }),
+    defineField({
       name: 'nextProject',
       title: 'Next Project',
       type: 'array',

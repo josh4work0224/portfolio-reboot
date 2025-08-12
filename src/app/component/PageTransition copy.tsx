@@ -2,15 +2,15 @@
 import { useRouter, usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { projectData } from "@/lib/sanity.queries";
-import { ProjectMain } from "../types/project";
+import Image from "next/image";
 
 type TransitionPhase = "idle" | "sliding-in" | "covered" | "sliding-out";
 
 interface PageConfig {
   type: "text" | "project";
   content: string;
-  icon?: string; // emoji
+  alt?: string;
+  icon?: string;
 }
 
 const PAGE_CONFIGS: Record<string, PageConfig> = {
@@ -19,60 +19,99 @@ const PAGE_CONFIGS: Record<string, PageConfig> = {
   "/projects": { type: "text", content: "Loading Projects...", icon: "💼" },
 };
 
-// ✅ 修改緩存結構
-const projectCache = new Map<string, { client: string; emoji?: string }>();
-
-// ✅ 使用你現有的 projectData 函數
-const getProjectDataFromSanity = async (
+const getProjectImageFromSanity = async (
   slug: string
-): Promise<{ client: string; emoji?: string } | null> => {
-  console.log("🔍 Fetching project data for:", slug);
-
-  // 檢查緩存
-  if (projectCache.has(slug)) {
-    console.log("📦 Found in cache:", projectCache.get(slug));
-    return projectCache.get(slug)!;
-  }
-
+): Promise<string | null> => {
   try {
-    console.log("🌐 Fetching from Sanity for slug:", slug);
-    const project: ProjectMain = await projectData(slug);
-    console.log("✅ Sanity response data:", project);
-
-    if (!project) {
-      console.log("❌ Project not found");
-      return null;
-    }
-
-    // ✅ 使用 client 和 emoji
-    const result = { client: project.client || slug, emoji: project.emoji };
-
-    // 緩存結果
-    projectCache.set(slug, result);
-    console.log("💾 Cached result:", result);
-
-    return result;
+    const response = await fetch(`/api/project/${slug}?fields=thumbnail`);
+    if (!response.ok) return null;
+    const data = await response.json();
+    return data.coverImage?.asset?.url || data.thumbnail?.asset?.url || null;
   } catch (error) {
-    console.error("💥 Failed to fetch project data:", error);
+    console.error("Failed to fetch project image:", error);
     return null;
   }
 };
 
 const getPageConfig = (path: string): PageConfig => {
   if (PAGE_CONFIGS[path]) return PAGE_CONFIGS[path];
-
-  if (path.startsWith("/projects/")) {
-    const slug = path.split("/projects/")[1];
+  if (path.startsWith("/project/")) {
     return {
       type: "project",
-      content: `Loading ${slug}...`,
-      icon: "🎨", // 默認icon
+      content: path.split("/project/")[1],
+      alt: "Loading project...",
     };
   }
   return { type: "text", content: "Loading...", icon: "⚡" };
 };
 
+const ProjectLoadingContent = ({ slug }: { slug: string }) => {
+  const [projectImage, setProjectImage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProjectImage = async () => {
+      const imageUrl = await getProjectImageFromSanity(slug);
+      setProjectImage(imageUrl);
+      setIsLoading(false);
+    };
+    fetchProjectImage();
+  }, [slug]);
+
+  return (
+    <div className="flex flex-col items-center justify-center space-y-6">
+      <div className="relative w-32 h-32 rounded-lg overflow-hidden bg-gray-800">
+        {isLoading ? (
+          <div className="w-full h-full bg-gray-700 animate-pulse flex items-center justify-center">
+            <div className="text-gray-500 text-sm">📷</div>
+          </div>
+        ) : projectImage ? (
+          <Image
+            src={projectImage}
+            alt={`${slug} project image`}
+            fill
+            className="object-cover animate-pulse"
+            priority
+          />
+        ) : (
+          <div className="w-full h-full bg-gray-700 flex items-center justify-center">
+            <div className="text-gray-400 text-2xl">🎨</div>
+          </div>
+        )}
+      </div>
+      <div className="flex space-x-1">
+        {[0, 1, 2].map((i) => (
+          <motion.div
+            key={i}
+            className="w-2 h-2 bg-white rounded-full"
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.4, 1, 0.4],
+            }}
+            transition={{
+              duration: 1.2,
+              repeat: Infinity,
+              delay: i * 0.3,
+            }}
+          />
+        ))}
+      </div>
+      <div className="text-center">
+        <div className="text-white text-lg opacity-90">
+          Loading {slug.replace("-", " ")}
+        </div>
+        <div className="text-gray-400 text-sm mt-1">
+          Getting project details...
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const LoadingContent = ({ config }: { config: PageConfig }) => {
+  if (config.type === "project") {
+    return <ProjectLoadingContent slug={config.content} />;
+  }
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
       {config.icon && (
@@ -113,9 +152,8 @@ export default function GlobalTransition({
     useState<TransitionPhase>("idle");
   const [nextUrl, setNextUrl] = useState<string | null>(null);
   const [shouldPreventNavigation, setShouldPreventNavigation] = useState(false);
-  const [currentConfig, setCurrentConfig] = useState<PageConfig>(
-    getPageConfig(pathname)
-  );
+
+  const currentConfig = getPageConfig(nextUrl || pathname);
 
   // ✅ 攔截 link click
   useEffect(() => {
@@ -136,43 +174,9 @@ export default function GlobalTransition({
 
       e.preventDefault();
       e.stopPropagation();
-
-      console.log("🔗 Link clicked:", href);
       setNextUrl(href);
-
-      if (href.startsWith("/projects/")) {
-        const slug = href.split("/projects/")[1];
-        console.log("🎨 Project link detected, slug:", slug);
-
-        // 先設置默認配置並開始動畫
-        setCurrentConfig({
-          type: "project",
-          content: `Loading ${slug}...`,
-          icon: "🎨",
-        });
-        setTransitionPhase("sliding-in");
-        setShouldPreventNavigation(true);
-
-        // ✅ 異步獲取真實數據並更新配置
-        getProjectDataFromSanity(slug)
-          .then((data) => {
-            console.log("📊 Project data received:", data);
-            if (data) {
-              setCurrentConfig({
-                type: "project",
-                content: `Loading ${data.client}...`, // ✅ 使用 client 名稱
-                icon: data.emoji || "🎨", // ✅ 使用 Sanity 的 emoji
-              });
-            }
-          })
-          .catch((error) => {
-            console.error("💥 Error fetching project data:", error);
-          });
-      } else {
-        setCurrentConfig(getPageConfig(href));
-        setTransitionPhase("sliding-in");
-        setShouldPreventNavigation(true);
-      }
+      setTransitionPhase("sliding-in");
+      setShouldPreventNavigation(true);
     };
 
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -187,29 +191,9 @@ export default function GlobalTransition({
     };
   }, [pathname, transitionPhase, shouldPreventNavigation]);
 
-  // ✅ 預載當前項目頁面數據
-  useEffect(() => {
-    if (pathname.startsWith("/projects/")) {
-      const slug = pathname.split("/projects/")[1];
-      console.log("🔄 Preloading current project:", slug);
-
-      getProjectDataFromSanity(slug).then((data) => {
-        if (data && transitionPhase === "idle") {
-          console.log("🎯 Setting preloaded config:", data);
-          setCurrentConfig({
-            type: "project",
-            content: `Loading ${data.client}...`, // ✅ 使用 client 名稱
-            icon: data.emoji || "🎨", // ✅ 使用 Sanity 的 emoji
-          });
-        }
-      });
-    }
-  }, [pathname, transitionPhase]);
-
   // ✅ 滑入完成後導向新頁面
   const handleSlideInComplete = () => {
     if (transitionPhase === "sliding-in" && nextUrl) {
-      console.log("✨ Slide in complete, navigating to:", nextUrl);
       window.dispatchEvent(new Event("pageTransitionStart"));
       setTransitionPhase("covered");
       setShouldPreventNavigation(false);
@@ -221,7 +205,6 @@ export default function GlobalTransition({
   useEffect(() => {
     const handlePageReady = () => {
       if (transitionPhase === "covered") {
-        console.log("📄 Page ready, starting slide out");
         setTransitionPhase("sliding-out");
       }
     };
@@ -231,7 +214,6 @@ export default function GlobalTransition({
 
   const handleSlideOutComplete = () => {
     if (transitionPhase === "sliding-out") {
-      console.log("🏁 Transition complete");
       setTransitionPhase("idle");
       setNextUrl(null);
     }

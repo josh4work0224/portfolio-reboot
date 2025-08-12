@@ -63,6 +63,7 @@ export interface ProjectMain {
   overview?: string;
   background?: string;
   color?: string;
+  emoji?: string;
   hero?: {
     asset: {
       _id: string;
@@ -100,6 +101,7 @@ export interface ProjectArchive {
   };
   title: string;
   client: string;
+  emoji?: string;
   category: { _id: string; title: string }[];
   background?: string;
   thumbnail?: {
